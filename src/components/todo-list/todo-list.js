@@ -1,7 +1,8 @@
 import React from 'react';
-import $ from 'jquery';
 
 import './todo-list.css';
+
+let ado = 'ado d-none';
 
 class TodoList extends React.Component{
     constructor(props){
@@ -32,6 +33,16 @@ class TodoList extends React.Component{
     }
 
     render(){
+
+        const open = () => {
+            ado = 'ado';
+            return ado;
+        }
+        const close = () =>{
+            ado = 'ado d-none';
+            return ado;
+        }
+
         const { error, isLoaded, items } = this.state;
         if (error) {
         return <div>Error: {error.message}</div>;
@@ -46,11 +57,13 @@ class TodoList extends React.Component{
                         <div className="card-body">
                             <h5 className="card-title">FirstName: {item.name.first}</h5>
                             <h5 className="card-title">LastName: {item.name.last}</h5>
-                            <div>
-                                <p class="card-text">Street: {item.location.street}</p>
-                                <p class="card-text">City: {item.location.city}</p>
-                                <p class="card-text">Postcode: {item.location.postcode}</p>
+                            <div className={ado}>
+                                <p className="card-text">Street: {item.location.street}</p>
+                                <p className="card-text">City: {item.location.city}</p>
+                                <p className="card-text">Postcode: {item.location.postcode}</p>
                             </div><br />
+                            <button className="btn btn-primary" onClick={open}>Open</button>
+                            <button className="btn btn-primary" onClick={close}>Close</button>
                         </div>
                     </div>
                 ))}
